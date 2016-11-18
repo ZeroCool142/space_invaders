@@ -38,17 +38,14 @@ public class GameScreen implements Screen {
     private Array<Missile> missiles;
     private long lastTimeLaunch;
     private Sound explode;
-    private Music backgroundMusic;
+
 
     public GameScreen(final SpaceInvaders game){
         this.game = game;
         score = 0;
         background = new Texture(Gdx.files.internal("spaceBackground.png"));
         explode = Gdx.audio.newSound(Gdx.files.internal("explosion.wav"));
-        backgroundMusic = Gdx.audio.newMusic(Gdx.files.internal("backgroundMusic.mp3"));
-        backgroundMusic.setVolume(0.2f);
-        backgroundMusic.setLooping(true);
-        backgroundMusic.play();
+
 
         lives = new Array<Life>();
         for (int i = 0; i < 3; i++){
@@ -73,6 +70,8 @@ public class GameScreen implements Screen {
 
         camera = new OrthographicCamera();
         camera.setToOrtho(false, SpaceInvaders.WIDTH, SpaceInvaders.HEIGTH);
+
+
     }
 
     private void handleInput(){
@@ -177,8 +176,8 @@ public class GameScreen implements Screen {
         player.update(delta);
         laser.update(delta);
         moveEnemies(delta);
-        checkEnemies();
         launchMissile(delta);
+        checkEnemies();
         handleInput();
     }
 
@@ -222,7 +221,7 @@ public class GameScreen implements Screen {
             l.dispose();
         }
         background.dispose();
-        backgroundMusic.dispose();
+
         explode.dispose();
     }
 
